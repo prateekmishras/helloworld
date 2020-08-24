@@ -1,7 +1,10 @@
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField, 
+  PropertyPaneCheckbox,  
+  PropertyPaneToggle,  
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
@@ -42,11 +45,12 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: 'page 1' + strings.PropertyPaneDescription
           },
           groups: [
             {
               groupName: strings.BasicGroupName,
+             
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
@@ -54,7 +58,63 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
               ]
             }
           ]
+        },
+        {
+          header: {
+          description: "Page2"
+          },
+          groups: 
+          [
+            {
+              groupName: "Group 2",
+              groupFields: 
+              [
+                PropertyPaneTextField('description', {
+                label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneCheckbox('isChecked',
+                {
+                text:"Checkbox",
+                checked:true 
+                })
+              ]
+            }
+          ]
+        },
+        {
+          header:{
+          description:"Page 3"
+          },
+          groups:
+          [
+            {
+              groupName : "Group 3",
+              groupFields:
+              [
+                PropertyPaneDropdown('dropdownfield1',{
+                label:"Dropdown",
+                options:
+                [
+                  {key:1,text:"test 1"},
+                  {key:2,text:"test 2"},
+                  {key:3,text:"test 3"}
+                ]
+                })
+              ]
+            },
+            {
+              groupName:"Group 4  ",
+              groupFields:
+              [
+                PropertyPaneToggle('toggle1',{
+                label:"Toggle property"
+                })
+              ]
+            }
+          ]
         }
+
+
       ]
     };
   }
