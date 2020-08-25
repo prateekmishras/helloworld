@@ -14,11 +14,26 @@ import * as strings from 'HelloWorldWebPartStrings';
 
 export interface IHelloWorldWebPartProps {
   description: string;
+  isChecked:boolean;
+  dropdownfield1:string;
 }
 
 export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorldWebPartProps> {
-
+ 
   public render(): void {
+    let ddValue ="";
+    if(this.properties.dropdownfield1 =="1")
+    {
+      ddValue = "item one";      
+    }
+    if(this.properties.dropdownfield1 =="2")
+    {
+      ddValue = "item two";      
+    }
+    if(this.properties.dropdownfield1 =="3")
+    {
+      ddValue = "item three";      
+    }
     this.domElement.innerHTML = `
       <div class="${ styles.helloWorld }">
         <div class="${ styles.container }">
@@ -27,6 +42,8 @@ export default class HelloWorldWebPart extends BaseClientSideWebPart<IHelloWorld
               <span class="${ styles.title }">Welcome to SharePoint!</span>
               <p class="${ styles.subTitle }">Customize SharePoint experiences using Web Parts.</p>
               <p class="${ styles.description }">${escape(this.properties.description)}</p>
+              <p>Checkbox value from property pane: ${escape(this.properties.isChecked? "checked":"not checked")}</p>
+              <p>drop down value from property pane: ${escape(ddValue)}</p>
               <a href="https://aka.ms/spfx" class="${ styles.button }">
                 <span class="${ styles.label }">Learn more</span>
               </a>
